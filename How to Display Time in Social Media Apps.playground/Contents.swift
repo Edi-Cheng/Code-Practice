@@ -16,18 +16,32 @@ extension Date {
         let hour = 60 * minute
         let day = 24 * hour
         let week = 7 * day
+        let month = 4 * week
+        
+        let quotient: Int
+        let unit: String
         
         if secondsAgo < minute {
-            return "\(secondsAgo) seconds ago"
+            quotient = secondsAgo
+            unit = "sccond"
         } else if secondsAgo < hour {
-            return "\(secondsAgo / minute) minutes ago"
+            quotient = secondsAgo / minute
+            unit = "min"
         } else if secondsAgo < day {
-            return "\(secondsAgo / hour) hours ago"
+            quotient = secondsAgo / hour
+            unit = "hour"
         } else if secondsAgo < week {
-            return "\(secondsAgo / day) days ago"
+            quotient = secondsAgo / day
+            unit = "day"
+        } else if secondsAgo < month {
+            quotient = secondsAgo / month
+            unit = "week"
+        } else {
+            quotient = secondsAgo / month
+            unit = "month"
         }
         
-        return "\(secondsAgo / week) weeks ago"
+        return "\(quotient) \(unit)\(quotient == 1 ? "" : "s")" ago"
     }
 }
 
